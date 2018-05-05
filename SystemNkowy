@@ -1,0 +1,55 @@
+package binarny;
+
+import java.util.Scanner;
+
+public class SystemNkowy {
+
+    public static int getNumber() {
+        Scanner inputNumber = new Scanner(System.in);
+        System.out.println("Podaj liczbę naturalną w systemie dziesiętnym:");
+        int number = inputNumber.nextInt();
+        return number;
+    }
+    public static int getN() {
+        Scanner inputN = new Scanner(System.in);
+        System.out.println("Podaj liczbę reprezentującą system:");
+        int n = inputN.nextInt();
+        return n;
+    }
+
+    private static int countConvertion(int number, int n){
+        int counter = 0;
+        int tempNumber = number;
+        while (tempNumber != 0){
+            tempNumber /= n;
+            counter++;
+        }
+        return counter;
+    }
+
+    public static void convertionToN(int number, int n) {
+        int mod = 1;
+        int tempNumber = number;
+        int counter = 0;
+        int[] convertedNumber = new int[countConvertion(number, n)+1];
+        while (tempNumber != 0) {
+            convertedNumber[counter] = tempNumber % n;
+            tempNumber /= n;
+            counter++;
+        }
+        if (number < 0){
+            convertedNumber[convertedNumber.length-1] = 1;
+            System.out.print(convertedNumber[convertedNumber.length-1]);
+            mod = -1;
+        }
+        for (int j = (counter-1); j >= 0; j--) {
+            convertedNumber[j] *= mod;
+            System.out.print(convertedNumber[j]);
+        }
+
+    }
+
+    public static void main(String[] args) {
+        convertionToN(getNumber(), getN());
+    }
+}
